@@ -2,7 +2,8 @@
 #include "Platform.h"
 #include "Util.h"
 
-#include <sys/random.h>
+//#include <linux/random.h> not found in centos
+#include <sys/syscall.h>
 #include <execinfo.h>
 #include <signal.h>
 #include <atomic>
@@ -12,6 +13,12 @@
 #endif
 
 std::atomic<bool> _crashed = false;
+
+
+ssize_t getrandom(void *buffer, size_t length, unsigned int wur)
+{
+    return (ssize_t)syscall(SYS_getrandom, buffer, length, wur);
+}
 
 //-----------------------------------------------------------
 size_t SysHost::GetPageSize()

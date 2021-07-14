@@ -63,7 +63,7 @@ ifeq ($(PLATFORM),linux)
 	ifeq ($(is_arm),1)
 		LDFLAGS += -Llib/linux/arm
 	else
-		LDFLAGS += -Llib/linux/x86
+		LDFLAGS += -Llib/linux/x86 -lgmp
 	endif
 endif
 
